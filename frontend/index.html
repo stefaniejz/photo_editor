@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="assets/stylesheets/semantic.css">
+        <link rel="stylesheet" type="text/css" href="assets/stylesheets/semantic-range.css">
+        <link rel="stylesheet" type="text/css" href="assets/stylesheets/style.css">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="crossorigin="anonymous"></script>
+  <script type="text/javascript" src="assets/scripts/semantic.js"></script>
+  <script type="text/javascript" src="assets/scripts/semantic-range.js"></script>
+  <script type="text/javascript" src="assets/scripts/index.js"></script>
+    </head>
+    <body>
+        <div class="ui six column centered grid">
+            <div class="centered row control panel">
+              <div class="two wide column" id="adjust">
+                <i class="sliders horizontal icon"></i>
+              </div>
+              <div class="two wide column" id="effect">
+                <i class="magic icon"></i>
+              </div>
+              <div class="two wide column" id="save" style="display: none;">
+                <i class="save icon"></i>
+              </div>
+              <div class="two wide column" id="open">
+                <input type="file" id="imageLoader" name="imageLoader" hidden="true" />
+                <i class="folder open icon"></i>
+              </div>
+              <div class="two wide column" id="close">
+                <i class="close icon"></i>
+              </div>
+            </div>
+            <div class="centered row control sub-panel" style="display:none" id="effect-sub-menu">
+                <div class="two wide column">
+                  <div class="ui segment" id="original-effect">
+                    <div class="ui bottom attached label">Original</div>
+                    <img class="ui wireframe image" src="assets/images/original.jpg">
+                  </div>
+                </div>
+                <div class="two wide column">
+                  <div class="ui segment" id="grey-effect">
+                    <div class="ui bottom attached label">Grey</div>
+                    <img class="ui wireframe image" src="assets/images/grey-scale.jpg">
+                  </div>
+                </div>
+                <div class="two wide column">
+                  <div class="ui segment" id="xpro2-effect">
+                    <div class="ui bottom attached label">X-Pro 2</div>
+                    <img class="ui wireframe image" src="assets/images/xpro2.jpg">
+                  </div>
+                </div>
+                <div class="two wide column">
+                  <div class="ui segment" id="lofi-effect">
+                    <div class="ui bottom attached label">Lo Fi</div>
+                    <img class="ui wireframe image" src="assets/images/lofi.jpg">
+                  </div>
+                </div>
+                <div class="two wide column">
+                  <div class="ui segment" id="hudson-effect">
+                    <div class="ui bottom attached label">Hudson</div>
+                    <img class="ui wireframe image" src="assets/images/hudson.jpg">
+                  </div>
+                </div>
+            </div>
+            <div class="centered row control sub-panel"  id="adjust-sub-menu">
+              <div class="two wide column">
+                <label>Contrast</label>
+                <div class="ui range" id="contrast"></div>
+              </div>
+              <div class="two wide column">
+                  <label>Brightness</label>
+                  <div class="ui range" id="brightness"></div>
+              </div>
+              <div class="two wide column">
+                  <label>HUE</label>
+                  <div class="ui range" id="hue"></div>
+              </div>
+              <div class="two wide column">
+                  <label>Saturation</label>
+                  <div class="ui range" id="saturation"></div>
+              </div>
+              
+         </div>
+               
+            
+    </body>
+</html>

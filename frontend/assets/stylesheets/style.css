@@ -1,0 +1,68 @@
+.control.panel {
+	background-color: #292c31;
+	color: rgba(255,255,255,.5);
+	font-size: 25px;
+}
+
+.control.panel .column:hover {
+	color: rgba(255,255,255,.8);
+	cursor: pointer;
+}
+
+.control.panel .icon {
+	padding: 1.5em;
+}
+
+.control.sub-panel {
+  background-color: #393e46;
+  box-shadow: inset 1px 2px 2px 1px #222, inset 1px -2px 2px 1px #333;
+}
+
+.control.sub-panel .ui.segment:hover {
+  cursor:pointer;
+}
+
+canvas {
+    padding: 0;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 10px;
+}
+
+body {
+  background-color: #505762;
+}
+
+.workspace {
+  margin-top: 30px;
+}
+
+.sub-panel label {
+  font-weight: 400;
+  color: hsla(0,0%,100%,.8);
+}
+
+.ui.range .inner .track-fill {
+  background-color: #ddd;
+}
+
+.ui.range .inner .track {
+  background-color: #222;
+}
+
+.ui.range .inner {
+  margin: 0;
+}
+
+#adjust-sub-menu i {
+  color: hsla(0,0%,100%,.8);
+  font-size: 25px;
+  padding: 10px;
+}
+
+#adjust-sub-menu i:hover {
+  cursor:pointer;
+}
