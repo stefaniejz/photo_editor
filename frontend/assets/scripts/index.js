@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", event => {
         start: 1,
         step: 0.25,
         onChange: function(value, meta) {
-            console.log(value)
             if (meta.triggeredByUser && originalImage != null) {
                 if (imageState.contrast != value) {
                     imageState.contrast = value;
@@ -77,7 +76,7 @@ document.addEventListener("DOMContentLoaded", event => {
     // menu buttons
     const resetButton = document.getElementById('reset');
     resetButton.addEventListener("click", event => {
-        console.log('reset');
+      
     })
 
     displayCanvas = document.getElementById('photoCanvas');
@@ -124,6 +123,8 @@ document.addEventListener("DOMContentLoaded", event => {
     const saveButton = document.getElementById('save');
 
     saveButton.addEventListener("click", event => {
+     
+    let match = document.cookie.match(new RegExp('user_id=([^;]+)'));
         fetch('http://localhost:3000/photos', {
             method: 'POST',
             headers: {
@@ -132,11 +133,15 @@ document.addEventListener("DOMContentLoaded", event => {
             },
             body: JSON.stringify({
                 photo: {
-                    user_id: 1,
+                    user_id: match[1],
                     image: orignalSizedCanvas.toDataURL()
                 }
             })
-        });
+        })
+        .then(res => {
+  
+          console.log(res.json())
+        })
     })
 
     // effects sub-menu buttons
@@ -289,12 +294,6 @@ function hudsonEffect(data) {
     hueRotate(data, -10 / 180.0);
 }
 
-function amaroEffect(data) {
-    hueRotate(data, -10 / 180.0);
-    contrast(data, 0.9);
-    brightness(data, 1.1);
-    saturate(data, 1.5);
-}
 
 // contrast range: 0..2
 function contrast(data, contrast) {

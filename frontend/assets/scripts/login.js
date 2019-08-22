@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", event => {
         fetch("http://localhost:3000/login", {
           method:"Post",
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type':'application/json',
             'Accept': 'application/json'
             },
             body: JSON.stringify({
@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", event => {
             return res.json()
         })
         .then(json => {
+            console.log(json)
             document.cookie = "user_id=" + json.id + "; path=/";
             window.location.href = "http://localhost:8080/index"
         })
