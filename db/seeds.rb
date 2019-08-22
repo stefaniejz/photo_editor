@@ -11,7 +11,3 @@ Photo.delete_all
 
 User.create(name:"Grace")
 User.create(name:"Eric")
-Photo.create(url:"url1",user_id:1)
-Photo.create(url:"url1",user_id:2)
-Photo.create(url:"url2",user_id:1)
-Photo.create(url:"url4",user_id:1)

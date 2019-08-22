@@ -28,6 +28,9 @@
               <div class="two wide column" id="close">
                 <i class="close icon"></i>
               </div>
+              <div class="two wide column" id="user">
+                  <i class="user icon"></i>
+                </div>
             </div>
             <div class="centered row control sub-panel" style="display:none" id="effect-sub-menu">
                 <div class="two wide column">
@@ -77,10 +80,16 @@
               <div class="two wide column">
                   <label>Saturation</label>
                   <div class="ui range" id="saturation"></div>
-              </div>
-              
+              </div>  
+              <div class="two wide column">
+                <i class="undo icon" id="reset"></i>
+              </div>   
          </div>
-               
+         <div class="ui container workspace">
+          <div style="font-family: Lato">
+            <canvas id="photoCanvas" style="margin: auto"></canvas>
+          </div>
+        </div>
             
     </body>
 </html>
