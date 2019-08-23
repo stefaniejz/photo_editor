@@ -8,7 +8,6 @@ const MAX_HEIGHT = 600;
 
 let displayCanvas;
 let originalImage;
-let orignalSizedCanvas = document.createElement('canvas');
 
 let imageState = createOriginalImageState();
 
@@ -74,10 +73,6 @@ document.addEventListener("DOMContentLoaded", event => {
       });
 
     // menu buttons
-    const resetButton = document.getElementById('reset');
-    resetButton.addEventListener("click", event => {
-      
-    })
 
     displayCanvas = document.getElementById('photoCanvas');
 
@@ -111,19 +106,28 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const closeButton = document.getElementById('close');
     closeButton.addEventListener("click", event => {
-        closeCanvas()
+      closeCanvas();
     })
 
-    const userButton = document.getElementById('user');
+     const userButton = document.getElementById('user');
     userButton.addEventListener("click", event => {
       window.location.href = "http://localhost:8080/display"
     })
 
+    const resetButton = document.getElementById('reset');
+    resetButton.addEventListener("click", event => {
+      imageState = createOriginalImageState();
+      applyImageState();
+      $('#contrast').range('set value', 1);
+      $('#brightness').range('set value', 1);
+      $('#hue').range('set value', 0);
+      $('#saturation').range('set value', 1);
+    })
+
 
     const saveButton = document.getElementById('save');
-
     saveButton.addEventListener("click", event => {
-     
+    
     let match = document.cookie.match(new RegExp('user_id=([^;]+)'));
         fetch('http://localhost:3000/photos', {
             method: 'POST',
@@ -134,13 +138,13 @@ document.addEventListener("DOMContentLoaded", event => {
             body: JSON.stringify({
                 photo: {
                     user_id: match[1],
-                    image: orignalSizedCanvas.toDataURL()
+                    image: displayCanvas.toDataURL()
                 }
             })
         })
         .then(res => {
-  
           console.log(res.json())
+          closeCanvas()
         })
     })
 
@@ -182,8 +186,7 @@ function loadImage(e){
     reader.onload = function(event){
         originalImage = new Image();
         originalImage.onload = function(){
-            drawImage(originalImage, orignalSizedCanvas, false);
-            drawImage(originalImage, displayCanvas, true);
+            drawImage(originalImage, displayCanvas);
         }
         originalImage.src = event.target.result;
     }
@@ -199,7 +202,6 @@ function loadImage(e){
 function closeCanvas() {
     displayCanvas.getContext('2d').clearRect(0, 0, displayCanvas.width, displayCanvas.height);
     originalImage = null;
-    orignalSizedCanvas = document.createElement('canvas');
     // update menu
     const saveButton = document.getElementById('save');
     saveButton.style.display = "none";
@@ -210,29 +212,17 @@ function closeCanvas() {
     imageLoader.value = '';
 }
 
-function drawImage(img, canvas, scaled) {
+function drawImage(img, canvas) {
     let ctx = canvas.getContext('2d');
-    let scale;
-    if (scaled) {
-        scale = computeScale(img.width, img.height);
-    } else {
-        scale = 1;
-    }
+    let scale = computeScale(img.width, img.height);
+
     canvas.width = img.width * scale;
     canvas.height = img.height * scale;
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = '#e8e8e8';
-    ctx.fillRect(canvas.width - 50, canvas.height - 20, 50, 20);
-
-    ctx.font = "normal normal 700 14px 'Helvetica Neue'";
-    ctx.fillStyle = 'rgba(0,0,0,.6)';
-    ctx.textAlign = "center";
-    ctx.fillText((scale * 100).toFixed(0).toString() + "%", canvas.width - 24, canvas.height - 5);
 }
 
 function computeScale(width, height) {
-    if (width < MAX_WIDTH && height < MAX_HEIGHT) {
+    if (width <= MAX_WIDTH && height <= MAX_HEIGHT) {
         return 1.0;
     }
 
@@ -244,9 +234,9 @@ function computeScale(width, height) {
 }
 
 function applyImageState() {
-    orignalSizedCanvas = createTempCanvas(originalImage); 
-    let ctx = orignalSizedCanvas.getContext('2d');
-    let imageData = ctx.getImageData(0, 0, orignalSizedCanvas.width, orignalSizedCanvas.height);
+    let tempCanvas = createTempCanvas(originalImage); 
+    let ctx = tempCanvas.getContext('2d');
+    let imageData = ctx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
     let data = imageData.data;
 
     contrast(data, imageState.contrast);
@@ -258,7 +248,7 @@ function applyImageState() {
     ctx.putImageData(imageData, 0, 0);
     
     // copy data from tempCanvas to displayCanvas with scale
-    drawImage(orignalSizedCanvas, displayCanvas, true);
+    drawImage(tempCanvas, displayCanvas);
 }
 
 function greyEffect(data) {
@@ -425,7 +415,7 @@ function hueRotateMatrix(value) {
 
 function createTempCanvas(img) {
     let canvas = document.createElement('canvas');
-    drawImage(img, canvas, false);
+    drawImage(img, canvas);
     return canvas;
 }
 

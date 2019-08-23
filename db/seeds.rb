@@ -11,3 +11,7 @@ Photo.delete_all
 
 User.create(name:"Grace")
 User.create(name:"Eric")
+User.create(name:"Stephanie")
+User.create(name:"Tong")
+User.create(name:"Jack")
+User.create(name:"Annie")

@@ -3,7 +3,7 @@ require 'stringio'
 
 class PhotosController < ApplicationController
     def create
-        type = photo_params[:image][/data:image\/(.*);/, 1]
+        type = photo_params[:image][/^data:image\/(.*);/, 1]
         base64_image = photo_params[:image].sub(/^data:.*,/, '')
         decoded_image = Base64.decode64(base64_image)
         image = {io: StringIO.new(decoded_image), filename: "#{photo_params[:user_id]}-#{Time.current.to_i.to_s}.#{type}"}
