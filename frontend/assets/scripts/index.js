@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", event => {
     closeButton.addEventListener("click", event => {
       closeCanvas();
     })
+   
 
      const userButton = document.getElementById('user');
     userButton.addEventListener("click", event => {
@@ -123,7 +124,7 @@ document.addEventListener("DOMContentLoaded", event => {
       $('#hue').range('set value', 0);
       $('#saturation').range('set value', 1);
     })
-
+  
 
     const saveButton = document.getElementById('save');
     saveButton.addEventListener("click", event => {
